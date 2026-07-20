@@ -1,0 +1,21 @@
+---
+import '../styles/global.css'
+import '../styles/cards.css'
+import NavigationBar from '../components/navigationBar.astro'
+import { Image } from 'astro:assets';
+import Class800Image from '../assets/DSC_7879.jpg';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>maia395</title>
+  </head>
+  <body>
+    <NavigationBar/>
+	<div class="card">
+        <h1>Class 800</h1>
+        <Image src={Class800Image} width={1600} alt="An image of a class 800."/>
+    </div>
+  </body>
+</html>
