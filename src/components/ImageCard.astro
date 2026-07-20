@@ -1,0 +1,11 @@
+---
+import '../styles/global.css'
+import '../styles/cards.css'
+import { Image } from 'astro:assets';
+const {title, image, alt} = Astro.props;
+---
+
+<div class="card" style="display:flex;justify-content:center;flex-direction:column;align-items:center;padding:20px;">
+    <h1>{title}</h1>
+    <Image src={image} alt={alt} width="1500" style="border-radius:25px;"/>
+</div>

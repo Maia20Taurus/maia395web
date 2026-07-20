@@ -2,7 +2,7 @@
 import '../styles/global.css'
 import '../styles/cards.css'
 import NavigationBar from '../components/navigationBar.astro'
-import { Image } from 'astro:assets';
+import ImageCard from '../components/ImageCard.astro';
 import Class800Image from '../assets/DSC_7879.jpg';
 ---
 
@@ -13,9 +13,8 @@ import Class800Image from '../assets/DSC_7879.jpg';
   </head>
   <body>
     <NavigationBar/>
-	<div class="card">
-        <h1>Class 800</h1>
-        <Image src={Class800Image} width={1600} alt="An image of a class 800."/>
+    <div style="display:flex;flex-direction:column;align-items:center;">
+    <ImageCard title="Class 800" image={Class800Image} alt="A class 800 in Dawlish"/>
     </div>
-  </body>
+</body>
 </html>
