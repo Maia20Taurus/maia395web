@@ -3,12 +3,28 @@ import Logo from '../assets/maia395logo.svg';
 ---
 
 <style>
-    div {
+    .bar {
         background-color: #1E1E50;
+        position: absolute;
+        left: 50%;
+        width: 80%;
+        height: 80px;
+        top: 10px;
+        transform: translate(-50%, 0);
+        border-radius: 25px;
+        display: flex;
+        justify-content: left;
+        align-items:center;
+    }
+
+    .navButton {
+        font-size: 50px;
     }
 </style>
 
-<div>
-    <Logo />
+<div class="bar">
+    <Logo style="height:50px; margin:0px; padding:0px;" />
+    <div class="navButton"> Home </div>
+    <div class="navButton"> Trains </div>
 </div>
 
