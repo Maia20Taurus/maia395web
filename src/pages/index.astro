@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import NavigationBar from "../components/navigationBar.astro"
+import InfoCard from '../components/InfoCard.astro'
 ---
 
 <html lang="en">
@@ -10,6 +11,13 @@ import NavigationBar from "../components/navigationBar.astro"
   </head>
   <NavigationBar/>
   <body>
+	<InfoCard title="Introduction" content="Hello! I am Maia, a student studying Computer Science BSc. I have an avid interest in software,
+	trains and the Meshtastic project. The personal projects I am currently working on include a rust-native SRTM dataset plotter, a bridge
+	between my meshtastic node and this website, and a game where the player must connect various industries by designing their own railway
+	system."/>
+	<br/>
+	<InfoCard title="This website" content="I made this website with Astro and deployed it on cloudflare workers. It serves the purpose of
+	being my personal portfolio as well as a place to experiment with web technology and to show off my hobbies."/>
 	<h1> Bla bla bla :3 </h1>
 	<h1> hello </h1>
 	<h1> meow </h1>
