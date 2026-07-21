@@ -6,9 +6,9 @@ const {title, description, image, alt} = Astro.props;
 ---
 
 <div class="card" style="display:flex;justify-content:center;flex-direction:column;align-items:center;padding:20px;width:100%;max-width:2000px;box-sizing:border-box;">
-    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:40px;width:100%;padding-left:50px;">
-        <h1>{title}</h1>
+    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:40px;width:100%;">
+        <h2>{title}</h2>
         <p>{description}</p>
     </div>
-    <Image src={image} alt={alt} width={1600} layout="constrained" style="border-radius:25px;width:100%;height:auto;"/>
+    <Image src={image} alt={alt} style="border-radius:25px;width:100%;height:auto;"/>
 </div>
