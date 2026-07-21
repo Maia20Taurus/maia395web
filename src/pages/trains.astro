@@ -3,6 +3,7 @@ import '../styles/global.css'
 import '../styles/cards.css'
 import NavigationBar from '../components/navigationBar.astro'
 import ImageCard from '../components/ImageCard.astro';
+import GenericPageWrapper from '../components/GenericPageWrapper.astro';
 
 import Class800Image from '../assets/DSC_7879.jpg';
 import e300Image from '../assets/DSC_8002.jpg'
@@ -10,13 +11,7 @@ import e320Image from '../assets/DSC_8048.jpg'
 import Class395Image from '../assets/DSC_8311.jpg'
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>maia395</title>
-  </head>
-  <body>
-    <NavigationBar/>
+<GenericPageWrapper>
     <div style="display:flex;flex-direction:column;align-items:center;gap:30px;padding:30px;">
         <h1 style="width:70%;text-align:center;">Welcome! This is a collection of pictures I have taken of various trains that I'd like to share.</h1>
         <p>Copyright © 2026 Maia</p>
@@ -25,5 +20,4 @@ import Class395Image from '../assets/DSC_8311.jpg'
         <ImageCard title="Eurostar e300" description="An e300 near Ashford International" image={e300Image} alt="An e300 near Ashford International"/>
         <ImageCard title="Eurostar e320" description="An e320 near Ashford International" image={e320Image} alt="An e320 near Ashford International"/>
     </div>
-</body>
-</html>
+</GenericPageWrapper>

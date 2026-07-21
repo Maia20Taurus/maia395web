@@ -2,14 +2,10 @@
 import '../styles/global.css'
 import NavigationBar from "../components/navigationBar.astro"
 import InfoCard from '../components/InfoCard.astro'
+import GenericPageWrapper from '../components/GenericPageWrapper.astro'
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>maia395</title>
-  </head>
-  <body>
+<GenericPageWrapper>
 	<NavigationBar/>
 	<InfoCard title="Introduction" content="Hello! I am Maia, a student studying Computer Science BSc. I have an avid interest in software,
 	trains and the Meshtastic project. The personal projects I am currently working on include a SRTM dataset plotter, a bridge
@@ -23,5 +19,4 @@ import InfoCard from '../components/InfoCard.astro'
 	<h1> Bla bla bla :3 </h1>
 	<h1> hello </h1>
 	<h1> meow </h1>
-  </body>
-</html>
+</GenericPageWrapper>
