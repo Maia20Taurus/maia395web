@@ -7,7 +7,7 @@ import Logo from '../assets/maia395logo.svg';
         background-color: #222222;
         position: fixed;
         left: 50%;
-        height: 60px;
+        height: 40px;
         top: 10px;
         transform: translate(-50%, 0);
         border-radius: 25px;
@@ -22,16 +22,29 @@ import Logo from '../assets/maia395logo.svg';
     }
 
     .navButton {
-        font-size: 40px;
+        font-size: 35px;
         font-weight: bold;
         color: white;
         padding-top: 8px;
+        width:100%;
+        height:100%;
+        bottom:0%;
+    }
+
+    .navLink {
+        text-decoration: none;
+        color: white;
+    }
+
+    a:visited {
+        text-decoration: none;
+        color: white;
     }
 </style>
 
-<div class="bar">
-    <Logo style="width:200px; height:50px; margin:0px; padding:0px;" />
-    <div class="navButton"> Trains </div>
-    <div class="navButton"> Mesh </div>
+<div class="bar" style="display:flex;flex-direction:row;justify-content:space-evenly;">
+    <div class="navButton"> <a class="navLink" href="/"> <Logo style="width:100%;height:100%;"/> </a> </div>
+    <div class="navButton"> <a class="navLink" href="/trains"> Trains </a> </div>
+    <div class="navButton"> <a class="navLink" href="/meshtastic"> Mesh </a> </div>
 </div>
 
