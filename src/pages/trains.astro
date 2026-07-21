@@ -3,7 +3,11 @@ import '../styles/global.css'
 import '../styles/cards.css'
 import NavigationBar from '../components/navigationBar.astro'
 import ImageCard from '../components/ImageCard.astro';
+
 import Class800Image from '../assets/DSC_7879.jpg';
+import e300Image from '../assets/DSC_8002.jpg'
+import e320Image from '../assets/DSC_8048.jpg'
+import Class395Image from '../assets/DSC_8311.jpg'
 ---
 
 <html lang="en">
@@ -13,8 +17,11 @@ import Class800Image from '../assets/DSC_7879.jpg';
   </head>
   <body>
     <NavigationBar/>
-    <div style="display:flex;flex-direction:column;align-items:center;">
-    <ImageCard title="Class 800" image={Class800Image} alt="A class 800 in Dawlish"/>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:30px;padding:30px;">
+        <ImageCard title="Class 800" image={Class800Image} alt="A class 800 in Dawlish"/>
+        <ImageCard title="Class 395" image={Class395Image} alt="A class 395 near Ashford International"/>
+        <ImageCard title="Eurostar e300" image={e300Image} alt="An e300 near Ashford International"/>
+        <ImageCard title="Eurostar e320" image={e320Image} alt="An e320 near Ashford International"/>
     </div>
 </body>
 </html>
