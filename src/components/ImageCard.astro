@@ -10,5 +10,5 @@ const {title, description, image, alt} = Astro.props;
         <h2>{title}</h2>
         <p>{description}</p>
     </div>
-    <Image src={image} alt={alt} style="border-radius:25px;width:100%;height:auto;"/>
+    <Image layout="full-width" src={image} alt={alt} style="border-radius:25px;width:100%;height:auto;"/>
 </div>
