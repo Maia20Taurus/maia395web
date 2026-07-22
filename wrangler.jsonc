@@ -4,7 +4,7 @@
 	"compatibility_flags": [
 		"global_fetch_strictly_public"
 	],
-	"name": "maia395web",
+	"name": "my-astro-app",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"assets": {
 		"directory": "./dist",
