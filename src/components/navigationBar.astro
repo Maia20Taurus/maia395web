@@ -1,4 +1,5 @@
 ---
+import Logo from "./Logo.astro";
 ---
 
 <style>
@@ -38,11 +39,93 @@
         text-decoration: none;
         color: #1E1E50;
     }
+
+    .desktop {
+        display:flex;
+    }
+    .mobile {
+        display:none;
+        gap: 0px;
+        padding: 0px;
+        position: fixed;
+        top:0%;
+        box-shadow: 0px 1px 5px -1px grey;
+        box-sizing: border-box;
+    }
+
+    .mobileBar {
+        display:none;
+        background-color: #edeff0;
+        width:100%;
+        height:50px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items:center;
+        box-sizing:border-box;
+    }
+    .mobileNav {
+        width:100%;
+        display: none;
+        flex-direction:column;
+        justify-content:flex-start;
+        align-items: flex-end;
+        font-size: 30px;
+        padding-top:10px;
+        padding-right:10px;
+        gap:10px;
+        background-color: #edeff0;
+        box-sizing: border-box;
+        max-height:0;
+        overflow:hidden;
+        transition: max-height 0.4s ease-in-out;
+    }
+
+    @media screen and (max-width: 800px) {
+        .desktop {
+            display:none;
+        }
+        .mobile {
+            display:flex;
+        }
+        .mobileBar {
+            display:flex;
+        }
+        .mobileNav {
+            display:flex;
+        }
+    }
+
+    #hamburgerButton:checked ~ .mobileNav {
+        max-height:300px;
+    }
+    }
+}
 </style>
 
-<div class="bar">
+<div class="bar desktop">
     <div class="navButton"> <a class="navLink" href="/"> Home </a> </div>
     <div class="navButton"> <a class="navLink" href="/trains"> Trains </a> </div>
     <div class="navButton"> <a class="navLink" href="/meshtastic"> Mesh </a> </div>
+</div>
+
+<div class="mobile" style="width:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;position:fixed;">
+    <input hidden id="hamburgerButton" type="checkbox">
+
+    <div class="mobileBar" style="padding: 0 15px;">
+
+        <div style="width:35%;"><Logo/></div>
+
+        <label for="hamburgerButton" style="display:flex;flex-direction:column;justify-content:space-between;align-items:center;width:24px;height:16px;background:transparent;border:none;padding:0;cursor:pointer;">
+            <input hidden id="hamburgerButton" style="position:relative;width:100%;height:100%;" type="checkbox">
+            <div style="background-color:#1E1E50;border-radius:10px;width:100%;height:10%;"/>
+            <div style="background-color:#1E1E50;border-radius:10px;width:100%;height:10%;"/>
+            <div style="background-color:#1E1E50;border-radius:10px;width:100%;height:10%;"/>
+        </label>
+    </div>
+    <div class="mobileNav">
+        <a class="navLink" href="/"> Home </a>
+        <a class="navLink" href="/trains"> Trains </a>
+        <a class="navLink" href="/meshtastic"> Mesh </a>
+    </div>
 </div>
 
