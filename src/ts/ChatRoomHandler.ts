@@ -16,11 +16,17 @@ function addMessage(shortname: string, timestamp: string, message: string): void
 addMessage("Maia","10:02","Hello World!");
 addMessage("Strg","11:52","Hello Maia!");
 
+function sendMessage(ws: WebSocket) {
+    let data = {shortname: "Echo", timestamp: "15:35", message:"Echoes to you"};
+    ws.send(JSON.stringify(data));
+}
+
 // Dynamic hostname allows this code to work in dev
 let hostname = window.location.host;
 
 // Client side initiates a websocket connection
 function join() {
+    console.log("Attempting to connect to /api/mesh-messages");
     const wss = document.location.protocol === "http:" ? "ws://" : "wss://";
     let ws = new WebSocket(wss + hostname + "/api/mesh-messages");
 
@@ -37,8 +43,8 @@ function join() {
 
 
     ws.addEventListener("open", event => {
-        let data = {name: "Echo", timestamp: "15:35", message:"Echoes to you"};
-        ws.send("Hello socket!");
+        console.log("Connected to socket!");
+        setTimeout(() => sendMessage(ws), 5000);
     });
 }
 join();
