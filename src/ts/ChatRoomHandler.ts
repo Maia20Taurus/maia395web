@@ -38,6 +38,7 @@ function join() {
 
     ws.addEventListener("error", event => {
         console.log("WebSocket error, reconnecting:", event);
+        setTimeout(function() {}, 5000);
         join();
     });
 
