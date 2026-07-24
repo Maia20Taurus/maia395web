@@ -17,7 +17,8 @@ addMessage("Maia","10:02","Hello World!");
 addMessage("Strg","11:52","Hello Maia!");
 
 function sendMessage(ws: WebSocket) {
-    let data = {shortname: "Echo", timestamp: "15:35", message:"Echoes to you"};
+    let date: Date = new Date();
+    let data = {shortname: "Echo", timestamp: date.getHours() + ":" + date.getMinutes(), message:"Echoes to you"};
     ws.send(JSON.stringify(data));
 }
 
@@ -26,26 +27,23 @@ let hostname = window.location.host;
 
 // Client side initiates a websocket connection
 function join() {
-    console.log("Attempting to connect to /api/mesh-messages");
     const wss = document.location.protocol === "http:" ? "ws://" : "wss://";
     let ws = new WebSocket(wss + hostname + "/api/mesh-messages");
 
     ws.addEventListener("message", event => {
-        console.log(event.data);
         let data = JSON.parse(event.data);
         addMessage(data.shortname,data.timestamp,data.message);
     });
 
     ws.addEventListener("error", event => {
-        console.log("WebSocket error, reconnecting:", event);
+        // Small timer to delay reconnect attempts
         setTimeout(function() {}, 5000);
         join();
     });
 
 
     ws.addEventListener("open", event => {
-        console.log("Connected to socket!");
-        setTimeout(() => sendMessage(ws), 5000);
+        sendMessage(ws);
     });
 }
 join();
