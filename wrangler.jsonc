@@ -20,12 +20,11 @@
 				"class_name": "MeshChatServer"
 			}
 		],
-    },
-    "exports": {
-    	"MeshChatServer": {
-        	"type": "durable-object",
-            "storage": "sqlite"
-        }
-    }
-    
+	},
+	"exports": {
+		"MeshChatServer": {
+			"type": "durable-object",
+			"storage": "sqlite"
+		}
+	}
 }
