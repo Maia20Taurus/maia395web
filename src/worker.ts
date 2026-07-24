@@ -35,8 +35,8 @@ export class MeshChatServer extends DurableObject<Env> {
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    console.log("Fetch called, details: " + request.headers.get("Upgrade"));
-    if (request.headers.get("Upgrade") == "websocket" && url.pathname === "/api/mesh-messages") {
+    const upgradeHeader = request.headers.get("Upgrade")?.toLowerCase();
+    if (upgradeHeader == "websocket" && url.pathname === "/api/mesh-messages") {
       let id = env.MESHCHAT_SERVER_DO.idFromName("foo");
       let stub = env.MESHCHAT_SERVER_DO.get(id);
       return stub.fetch(request);
