@@ -3,10 +3,20 @@ export const prerender = false
 
 import GenericPageWrapper from "../components/GenericPageWrapper.astro";
 import ChatStream from "../components/MeshtasticComponents/ChatStream.astro";
+import '../styles/cards.css'
+import '../styles/global.css'
 ---
 
-<GenericPageWrapper style="min-height:100dvh">
-    <h1 style="left:50%;width:100%;text-align:center;"> This page is a work in progress.
-        It will show a live chat of messages seen by my meshtastic node, which I often operate near Exeter, Devon.</h1>
-    <ChatStream/> 
+<GenericPageWrapper>
+    <h1 style="width:100%;text-align:center;"> This page is a work in progress.
+    It will show a live chat of messages seen by my meshtastic node, which I often operate near Exeter, Devon.
+    The chat messages shown below are simply for testing; the Echo message demonstrates that a websocket connection
+    has successfully been made between your browser and the server.</h1>
+    
+    <div style="width:100%;height:100dvh;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;">
+        <div class="card" style="width:95%">
+            <ChatStream class="card" />
+        </div>
+    </div>
+
 </GenericPageWrapper>
