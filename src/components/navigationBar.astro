@@ -101,13 +101,13 @@ import Logo from "./Logo.astro";
 }
 </style>
 
-<div class="bar desktop">
+<div role="navigation" class="bar desktop">
     <div class="navButton"> <a class="navLink" href="/"> Home </a> </div>
     <div class="navButton"> <a class="navLink" href="/trains"> Trains </a> </div>
     <div class="navButton"> <a class="navLink" href="/meshtastic"> Mesh </a> </div>
 </div>
 
-<div class="mobile" style="width:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;position:fixed;">
+<div role="navigation" class="mobile" style="width:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;position:fixed;">
     <input hidden id="hamburgerButton" type="checkbox">
 
     <div class="mobileBar" style="padding: 10px 15px 0;">
