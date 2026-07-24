@@ -7,8 +7,7 @@ export class MeshChatServer extends DurableObject<Env> {
 	}
 
   async fetch(request: Request) {
-    if (request.headers.get("Upgrade") == "websocket") {
-      // Creates two ends of a WebSocket connection.
+    // Creates two ends of a WebSocket connection.
       const webSocketPair = new WebSocketPair();
       const [client, server] = Object.values(webSocketPair);
 
@@ -21,9 +20,6 @@ export class MeshChatServer extends DurableObject<Env> {
           status: 101,
           webSocket: client,
       });
-    }
-
-    return new Response("Hello World!");
   }
 
   async webSocketMessage(ws: WebSocket, message: ArrayBuffer | string) {
@@ -38,6 +34,14 @@ export class MeshChatServer extends DurableObject<Env> {
 
 export default {
   async fetch(request, env, ctx) {
+    const url = new URL(request.url);
+    console.log("Fetch called, details: " + request.headers.get("Upgrade"));
+    if (request.headers.get("Upgrade") == "websocket" && url.pathname === "/api/mesh-messages") {
+      let id = env.MESHCHAT_SERVER_DO.idFromName("foo");
+      let stub = env.MESHCHAT_SERVER_DO.get(id);
+      return stub.fetch(request);
+    }
+
     return handle(request, env, ctx);
   },
   async queue(batch, _env) {
