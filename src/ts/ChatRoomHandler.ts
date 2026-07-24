@@ -43,7 +43,9 @@ function join() {
 
 
     ws.addEventListener("open", event => {
-        sendMessage(ws);
+        for (let i=0; i<49; i++) {
+            setTimeout(() => sendMessage(ws), 250);
+        }
     });
 }
 join();
