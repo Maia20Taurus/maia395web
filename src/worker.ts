@@ -26,7 +26,7 @@ export class MeshChatServer extends DurableObject<Env> {
 		// Upon receiving a message from the client, reply with the same message,
 		// but will prefix the message with "[Durable Object]: " and return the number of connections.
 		ws.send(
-      JSON.stringify(message)
+      message
 		);
     return;
 	}
