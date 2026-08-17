@@ -7,9 +7,10 @@ function addMessage(shortname: string, timestamp: string, message: string): void
     clone.querySelector("#ShortName")!.innerHTML = shortname;
     clone.querySelector("#Timestamp")!.innerHTML = timestamp;
     clone.querySelector("#Message")!.innerHTML = message;
-    if (ChatBox) {
-        ChatBox.appendChild(clone);
+    if (!ChatBox) {
+        return;
     }
+    ChatBox.appendChild(clone);
 }
 
 // Some testing messages
