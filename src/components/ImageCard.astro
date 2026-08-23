@@ -5,10 +5,10 @@ import { Image } from 'astro:assets';
 const {title, description, image, alt} = Astro.props;
 ---
 
-<div class="card" style="display:flex;justify-content:center;flex-direction:column;align-items:center;padding:10px;width:1fr;max-width:1fr;box-sizing:border-box;">
+<div class="card" style="display:flex;justify-content:center;flex-direction:column;align-items:center;padding:5px;width:1fr;max-width:1fr;box-sizing:border-box;">
     <div style="display:flex;flex-direction:row;align-items:center;justify-content:center;gap:40px;width:1fr;">
         <h2>{title}</h2>
         <p>{description}</p>
     </div>
-    <Image layout="full-width" src={image} alt={alt} style="border-radius:25px;max-width:100%;height:auto;"/>
+    <Image layout="full-width" src={image} alt={alt} style="border-radius:10px;max-width:100%;height:auto;"/>
 </div>
