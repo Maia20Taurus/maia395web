@@ -24,9 +24,9 @@ const {title, description, image, alt} = Astro.props;
 </style>
 
 <div class="card" style="display:flex;justify-content:center;flex-direction:column;align-items:center;padding:5px;width:100%;max-width:1fr;box-sizing:border-box;">
-    <div style="display:flex;flex-direction:row;align-items:center;justify-content:flex-start;gap:40px;width:100%;min-height:2.4rem;height:auto;">
+    <div style="display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:40px;width:100%;min-height:2.4rem;height:auto;">
         <span style="font-size:1.2rem;justify-self:flex-start;width:1fr;">{title}</span>
-        <span style="font-size:0.9rem;width:80%;text-align:right;">{description}</span>
+        <span style="font-size:0.9rem;width:1fr;text-align:right;">{description}</span>
     </div>
     <Image class="image" layout="full-width" src={image} alt={alt}/>
 </div>
