@@ -10,14 +10,10 @@ export class MeshChatServer extends DurableObject<Env> {
     let url = new URL(request.url)
 
     if (url.pathname === "/api/send-mesh-message") {
-
-      if (request.method == "POST") {
         this.ctx.getWebSockets().forEach((webSocket) => {
           //webSocket.send(null, {message: request);
         });
         return new Response("Message accepted", {status:200});
-      }
-      return new Response("Wrong request method. Only POST is accepted.", {status: 400})
     }
 
     // Creates two ends of a WebSocket connection.
