@@ -6,5 +6,6 @@ import { env } from 'cloudflare:workers';
 export const POST = (async ({ request }) => {
   const stub = env.MESHCHAT_SERVER_DO.getByName("foo");
   const body = await request.json();
-  return stub.replicateMessage(body);
+  stub.replicateMessage(body);
+  return new Response(null, {status:200});
 }) satisfies APIRoute;

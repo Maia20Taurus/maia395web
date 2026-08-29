@@ -12,7 +12,6 @@ export class MeshChatServer extends DurableObject<Env> {
     this.ctx.getWebSockets().forEach((webSocket) => {
       webSocket.send(jsonBody);
     });
-    return new Response(jsonBody, {status:200});
   }
 
   async fetch(request: Request) {
