@@ -8,13 +8,15 @@ export class MeshChatServer extends DurableObject<Env> {
 
   async fetch(request: Request) {
 
-    if (request.url.endsWith("/send-mesh-message") && request.method == "POST") {
+    if (request.url.endsWith("/send-mesh-message")) {
 
-      this.ctx.getWebSockets().forEach((webSocket) => {
-        //webSocket.send(null, {message: request);
-      });
-
-      return new Response("Message accepted", {status:200});
+      if (request.method == "POST") {
+        this.ctx.getWebSockets().forEach((webSocket) => {
+          //webSocket.send(null, {message: request);
+        });
+        return new Response("Message accepted", {status:200});
+      }
+      return new Response("Wrong request method. Only POST is accepted.", {status: 400})
     }
 
     // Creates two ends of a WebSocket connection.
