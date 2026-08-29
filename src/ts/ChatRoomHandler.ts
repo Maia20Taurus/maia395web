@@ -29,7 +29,7 @@ let hostname = window.location.host;
 // Client side initiates a websocket connection
 function join() {
     const wss = document.location.protocol === "http:" ? "ws://" : "wss://";
-    let ws = new WebSocket(wss + hostname + "/api/mesh-messages");
+    let ws = new WebSocket(wss + hostname + "/api/subscribe-mesh-messages");
 
     ws.addEventListener("message", event => {
         let data = JSON.parse(event.data);
