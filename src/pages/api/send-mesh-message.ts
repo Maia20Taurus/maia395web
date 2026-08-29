@@ -1,12 +1,9 @@
 export const prerender = false
 
-export default {
-  async fetch(request: Request, env: Env) {
-    if (request.method === "POST") {
-      const stub = env.MY_DURABLE_OBJECT.getByName("foo");
-      return stub.replicateMessage(request.body);
-    }
+import type { APIRoute } from "astro";
+import { env } from 'cloudflare:workers';
 
-    return new Response("Wrong request method. Only POST is accepted.", {status: 400});    
-  }
-}
+export const POST = (async ({ request }) => {
+  const stub = env.MESHCHAT_SERVER_DO.getByName("foo");
+  return stub.replicateMessage(request.body.message);
+}) satisfies APIRoute;
