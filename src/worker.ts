@@ -6,15 +6,15 @@ export class MeshChatServer extends DurableObject<Env> {
 		super(ctx, env);
 	}
 
+  async replicateMessage(message: string) {
+    this.ctx.getWebSockets().forEach((webSocket) => {
+          webSocket.send(message);
+    });
+    return new Response("Message accepted", {status:200});
+  }
+
   async fetch(request: Request) {
     let url = new URL(request.url)
-
-    if (url.pathname === "/api/send-mesh-message") {
-        this.ctx.getWebSockets().forEach((webSocket) => {
-          //webSocket.send(null, {message: request);
-        });
-        return new Response("Message accepted", {status:200});
-    }
 
     // Creates two ends of a WebSocket connection.
       const webSocketPair = new WebSocketPair();
