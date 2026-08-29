@@ -1,4 +1,5 @@
 import { handle } from '@astrojs/cloudflare/handler';
+import { json } from 'astro:schema';
 import { DurableObject } from 'cloudflare:workers';
 
 export class MeshChatServer extends DurableObject<Env> {
@@ -6,11 +7,12 @@ export class MeshChatServer extends DurableObject<Env> {
 		super(ctx, env);
 	}
 
-  async replicateMessage(message: string) {
+  async replicateMessage(body: JSON) {
+    let jsonBody = JSON.stringify(body);
     this.ctx.getWebSockets().forEach((webSocket) => {
-          webSocket.send(message);
+      webSocket.send(jsonBody);
     });
-    return new Response("Message accepted", {status:200});
+    return new Response(jsonBody, {status:200});
   }
 
   async fetch(request: Request) {
