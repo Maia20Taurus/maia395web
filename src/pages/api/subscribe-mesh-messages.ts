@@ -1,8 +1,9 @@
 export const prerender = false
 
-export default {
-  async fetch(request: Request, env: Env) {
-    const stub = env.MY_DURABLE_OBJECT.getByName("foo");
-    return stub.fetch(request);
-  }
-}
+import type { APIRoute } from "astro";
+import { env } from 'cloudflare:workers';
+
+export const GET = (async ({ request }) => {
+  const stub = env.MESHCHAT_SERVER_DO.getByName("foo");
+  return stub.fetch(request);
+}) satisfies APIRoute;
