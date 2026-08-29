@@ -7,5 +7,5 @@ export const POST = (async ({ request }) => {
   const stub = env.MESHCHAT_SERVER_DO.getByName("foo");
   const body = await request.json();
   stub.replicateMessage(body);
-  return new Response(null, {status:200});
+  return new Response(JSON.stringify(body), {status:200});
 }) satisfies APIRoute;
