@@ -7,8 +7,9 @@ export class MeshChatServer extends DurableObject<Env> {
 	}
 
   async fetch(request: Request) {
+    let url = new URL(request.url)
 
-    if (request.url.endsWith("/send-mesh-message")) {
+    if (url.pathname === "/api/send-mesh-message") {
 
       if (request.method == "POST") {
         this.ctx.getWebSockets().forEach((webSocket) => {
