@@ -1,3 +1,5 @@
+import { string } from "astro:schema";
+
 let ChatBox = document.getElementById("ChatBox");
 let temp = document.getElementsByTagName("template")[0];
 
@@ -33,7 +35,8 @@ function join() {
 
     ws.addEventListener("message", event => {
         let data = JSON.parse(event.data);
-        addMessage(data.shortname,data.timestamp,data.message);
+        let localTime = new Date(data.timestamp * 1000).toTimeString();
+        addMessage(data.shortname,localTime,data.message);
     });
 
     ws.addEventListener("error", event => {
