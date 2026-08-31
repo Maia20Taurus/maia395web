@@ -3,17 +3,21 @@ import { string } from "astro:schema";
 let ChatBox = document.getElementById("ChatBox");
 let temp = document.getElementsByTagName("template")[0];
 
-function addMessage(shortname: string, timestamp: string, message: string): void {
+function addMessage(shortname: string, unixTimestamp: number, message: string): void {
+    let localTime = new Date(unixTimestamp * 1000).toLocaleTimeString();
 
     let clone = temp.content.cloneNode(true) as DocumentFragment;
     clone.querySelector("#ShortName")!.innerHTML = shortname;
-    clone.querySelector("#Timestamp")!.innerHTML = timestamp;
+    clone.querySelector("#Timestamp")!.innerHTML = localTime;
     clone.querySelector("#Message")!.innerHTML = message;
     if (!ChatBox) {
         return;
     }
     ChatBox.appendChild(clone);
 }
+
+// test message
+addMessage("!07339f2b", 1788135928, "Hello World!");
 
 // Dynamic hostname allows this code to work in dev
 let hostname = window.location.host;
@@ -25,8 +29,7 @@ function join() {
 
     ws.addEventListener("message", event => {
         let data = JSON.parse(event.data);
-        let localTime = new Date(data.timestamp * 1000).toLocaleTimeString();
-        addMessage(data.shortname,localTime,data.message);
+        addMessage(data.shortname,data.timestamp,data.message);
     });
 
     ws.addEventListener("error", event => {
