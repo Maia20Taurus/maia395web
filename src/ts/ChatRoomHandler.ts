@@ -15,16 +15,6 @@ function addMessage(shortname: string, timestamp: string, message: string): void
     ChatBox.appendChild(clone);
 }
 
-// Some testing messages
-addMessage("Maia","10:02","Hello World!");
-addMessage("Strg","11:52","Hello Maia!");
-
-function sendMessage(ws: WebSocket) {
-    let date: Date = new Date();
-    let data = {shortname: "Echo", timestamp: date.getHours() + ":" + date.getMinutes(), message:"Echoes to you"};
-    ws.send(JSON.stringify(data));
-}
-
 // Dynamic hostname allows this code to work in dev
 let hostname = window.location.host;
 
@@ -47,7 +37,7 @@ function join() {
 
 
     ws.addEventListener("open", event => {
-        sendMessage(ws);
+        // currently does nothing but I may use this to tell the user that a connection has been established
     });
 }
 join();
