@@ -43,4 +43,32 @@ function join() {
         // currently does nothing but I may use this to tell the user that a connection has been established
     });
 }
+
+/**
+ * @throws {Error}
+ */
+async function receiveLatestMessages(): Promise<void> {
+    try {
+        const response = await fetch("/api/receive-mesh-message");
+        if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+    }
+
+    const result: JSON = await response.json();
+
+    for (let message of result) {
+        console.log(message);
+        const nodeID = "!" + message.nodeID.toString(16);
+        addMessage(nodeID, message.rxTimestamp, message.message);
+    }
+
+  } catch (error:any) {
+    console.error(error.message);
+  }
+
+  
+}
+
+
+receiveLatestMessages();
 join();

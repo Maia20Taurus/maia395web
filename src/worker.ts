@@ -11,7 +11,7 @@ export class MeshChatServer extends DurableObject<Env> {
 
   // Return last n messages in ascending order
   async getLastNMessages(n: number) {
-    return this.sql.exec("SELECT * FROM messages LIMIT ? ORDER BY rxTimestamp", n).toArray;
+    return this.sql.exec("SELECT * FROM messages ORDER BY rxTimestamp LIMIT ?", n).toArray();
   }
 
   // Send a message
