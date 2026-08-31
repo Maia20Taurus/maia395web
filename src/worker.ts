@@ -3,10 +3,18 @@ import { json } from 'astro:schema';
 import { DurableObject } from 'cloudflare:workers';
 
 export class MeshChatServer extends DurableObject<Env> {
+    sql: SqlStorage;
     constructor(ctx: DurableObjectState, env: Env) {
 		super(ctx, env);
+    this.sql = ctx.storage.sql;
 	}
 
+  // Return last n messages in ascending order
+  async getLastNMessages(n: number) {
+    return this.sql.exec("SELECT * FROM messages LIMIT ? ORDER BY rxTimestamp", n).toArray;
+  }
+
+  // Send a message
   async replicateMessage(body: JSON) {
     let jsonBody = JSON.stringify(body);
     this.ctx.getWebSockets().forEach((webSocket) => {
