@@ -35,7 +35,7 @@ function join() {
 
     ws.addEventListener("message", event => {
         let data = JSON.parse(event.data);
-        let localTime = new Date(data.timestamp * 1000).toTimeString();
+        let localTime = new Date(data.timestamp * 1000).toLocaleTimeString();
         addMessage(data.shortname,localTime,data.message);
     });
 
