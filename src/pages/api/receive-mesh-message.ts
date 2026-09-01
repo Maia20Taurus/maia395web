@@ -6,7 +6,6 @@ import { env } from 'cloudflare:workers';
 export const GET = (async ({ request }) => {
   const stub = env.MESHCHAT_SERVER_DO.getByName("foo");
   const messageRows = await stub.getLastNMessages(100);
-  console.log(messageRows);
 
   return new Response(JSON.stringify(messageRows), {status:200});
 }) satisfies APIRoute;
