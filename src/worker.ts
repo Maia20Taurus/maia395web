@@ -25,7 +25,7 @@ export class MeshChatServer extends DurableObject<Env> {
     );
   }
   // Send a message
-  async replicateMessage(body: JSON) {
+  async replicateMessage(body: MeshMessage) {
     let jsonBody = JSON.stringify(body);
     this.ctx.getWebSockets().forEach((webSocket) => {
       webSocket.send(jsonBody);

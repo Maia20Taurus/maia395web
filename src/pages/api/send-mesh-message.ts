@@ -5,7 +5,7 @@ import { env } from 'cloudflare:workers';
 
 export const POST = (async ({ request }) => {
   const stub = env.MESHCHAT_SERVER_DO.getByName("foo");
-  const body: JSON = await request.json();
+  const body: MeshMessage = await request.json();
   await stub.replicateMessage(body);
   await stub.saveMessage(body);
   return new Response(JSON.stringify(body), {status:200, headers:{"Content-Type":"application/json"}});

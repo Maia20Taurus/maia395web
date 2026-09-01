@@ -25,8 +25,8 @@ function join() {
     let ws = new WebSocket(wss + hostname + "/api/subscribe-mesh-messages");
 
     ws.addEventListener("message", event => {
-        let data = JSON.parse(event.data);
-        addMessage(data.shortname,data.timestamp,data.message);
+        let data: MeshMessage = JSON.parse(event.data);
+        addMessage(data.nodeID,data.rxTimestamp,data.message);
     });
 
     ws.addEventListener("error", event => {
