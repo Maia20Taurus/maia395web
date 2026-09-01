@@ -51,7 +51,7 @@ async function receiveLatestMessages(): Promise<void> {
         throw new Error(`Response status: ${response.status}`);
     }
 
-    const result: JSON = await response.json();
+    const result: Array<MeshMessage> = await response.json();
 
     for (let message of result) {
         console.log(message);
