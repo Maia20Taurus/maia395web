@@ -13,7 +13,7 @@ function addMessage(shortname: string, unixTimestamp: number, message: string): 
     if (!ChatBox) {
         return;
     }
-    ChatBox.appendChild(clone);
+    ChatBox.insertBefore(clone, ChatBox.firstChild);
 }
 
 // Dynamic hostname allows this code to work in dev
