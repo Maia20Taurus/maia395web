@@ -8,22 +8,16 @@ import "../styles/global.css";
 ---
 
 <GenericPageWrapper>
-    <main>
+    <main style="height:100%;">
         <div
-            style="display:flex;flex-direction:column;align-items:center;justify-content:center;width;100%;"
+            class="container" style="display:flex;flex-direction:column;align-items:center;justify-content:flex-start;width:1fr;height:100%;"
         >
-            <p style="width:90%;text-align:center;font-size:1.3rem">
+            <p style="width:90%;height:1fr;text-align:center;font-size:1.3rem">
                 This page is a work in progress. It shows live and historic
                 messages seen by my meshtastic node.
             </p>
 
-            <div
-                style="width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;"
-            >
-                <div class="card" style="width:95%;height:1fr;">
-                    <ChatStream class="card" />
-                </div>
-            </div>
+            <div style="width:95%;height:90%;box-sizing:border-box;"><ChatStream /></div>
         </div>
     </main>
 </GenericPageWrapper>
