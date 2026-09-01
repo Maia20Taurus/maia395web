@@ -14,6 +14,17 @@ export class MeshChatServer extends DurableObject<Env> {
     return this.sql.exec("SELECT * FROM messages ORDER BY rxTimestamp LIMIT ?", n).toArray();
   }
 
+  /**
+   * Save a message to the DO's SQLite database
+   * @param messageBody Expects 'shortname' field to have nodeID in hex form
+   */
+  async saveMessage(messageBody: string) {
+    const data = JSON.parse(messageBody);
+    const nodeIdDecimal = Number(data.shortname.replace("!","0x"));
+    this.sql.exec("INSERT INTO messages (nodeID, rxTimestamp, message) VALUES (?, ?, ?)",
+      nodeIdDecimal, data.timestamp, data.message
+    );
+  }
   // Send a message
   async replicateMessage(body: JSON) {
     let jsonBody = JSON.stringify(body);
