@@ -19,7 +19,7 @@ export class MeshChatServer extends DurableObject<Env> {
    * @param messageBody Expects 'shortname' field to have nodeID in hex form
    */
   async saveMessage(data: MeshMessage) {
-    const nodeIdDecimal = Number((data.nodeID.replace("!","")+"0x"));
+    const nodeIdDecimal = Number("0x"+(data.nodeID.replace("!","")));
     this.sql.exec("INSERT INTO messages (nodeID, rxTimestamp, message) VALUES (?, ?, ?)",
       nodeIdDecimal, data.rxTimestamp, data.message
     );
