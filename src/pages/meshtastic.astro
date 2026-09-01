@@ -1,25 +1,29 @@
 ---
-export const prerender = false
+export const prerender = false;
 
 import GenericPageWrapper from "../components/GenericPageWrapper.astro";
 import ChatStream from "../components/MeshtasticComponents/ChatStream.astro";
-import '../styles/cards.css'
-import '../styles/global.css'
+import "../styles/cards.css";
+import "../styles/global.css";
 ---
 
 <GenericPageWrapper>
     <main>
-    <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;width;100%;">
-        <h3 style="width:90%;text-align:center;"> This page is a work in progress. It shows live
-            and historic messages seen by my meshtastic node.
-        </h3>
-        
-        <div style="width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;">
-            <div class="card" style="width:95%;height:80vh;">
-                <ChatStream class="card" />
-            </div>
-    </div>
-    </div>
-    </main>
+        <div
+            style="display:flex;flex-direction:column;align-items:center;justify-content:center;width;100%;"
+        >
+            <p style="width:90%;text-align:center;font-size:1.3rem">
+                This page is a work in progress. It shows live and historic
+                messages seen by my meshtastic node.
+            </p>
 
+            <div
+                style="width:100%;height:100%;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;"
+            >
+                <div class="card" style="width:95%;height:80vh;">
+                    <ChatStream class="card" />
+                </div>
+            </div>
+        </div>
+    </main>
 </GenericPageWrapper>
