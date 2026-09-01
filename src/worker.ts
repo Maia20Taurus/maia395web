@@ -10,6 +10,12 @@ export class MeshChatServer extends DurableObject<Env> {
     this.sql = ctx.storage.sql;
 	}
 
+  async writeNodeInfo(nodeInfo: NodeInfo) {
+    this.sql.exec("INSERT INTO nodes (nodeID, shortname, longname) VALUES (?, ?, ?)",
+      nodeInfo.nodeID, nodeInfo.shortname, nodeInfo.longname
+    );
+  }
+
   /**
    * Get the associated NodeInfo for the given nodeID
    * @param nodeID 
