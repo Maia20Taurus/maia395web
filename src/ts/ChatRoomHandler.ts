@@ -16,9 +16,6 @@ function addMessage(shortname: string, unixTimestamp: number, message: string): 
     ChatBox.appendChild(clone);
 }
 
-// test message
-addMessage("!07339f2b", 1788135928, "Hello World! This is purely a test message and does not come from the mesh.");
-
 // Dynamic hostname allows this code to work in dev
 let hostname = window.location.host;
 
