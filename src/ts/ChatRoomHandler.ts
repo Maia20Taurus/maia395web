@@ -55,8 +55,7 @@ async function receiveLatestMessages(): Promise<void> {
 
     for (let message of result) {
         console.log(message);
-        const nodeID = "!" + message.nodeID.toString(16);
-        addMessage(nodeID, message.rxTimestamp, message.message);
+        addMessage(message.nodeID, message.rxTimestamp, message.message);
     }
 
   } catch (error:any) {
