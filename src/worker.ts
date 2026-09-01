@@ -1,4 +1,5 @@
 import { handle } from '@astrojs/cloudflare/handler';
+import node from 'astro/logger/node';
 import { json } from 'astro:schema';
 import { DurableObject } from 'cloudflare:workers';
 
@@ -8,6 +9,16 @@ export class MeshChatServer extends DurableObject<Env> {
 		super(ctx, env);
     this.sql = ctx.storage.sql;
 	}
+
+  /**
+   * Get the associated NodeInfo for the given nodeID
+   * @param nodeID 
+   * @returns the NodeInfo for the nodeID if it exists, otherwise null
+   */
+  async getNodeInfo(nodeID: string): Promise<NodeInfo|null> {
+    const nodeInfo = this.sql.exec("SELECT * FROM nodes WHERE nodeID = ?", nodeID).toArray()[0];
+    return (nodeInfo as NodeInfo) ?? null;
+  }
 
   // Return last n messages in ascending order
   async getLastNMessages(n: number) {
