@@ -11,7 +11,7 @@ export class MeshChatServer extends DurableObject<Env> {
 	}
 
   async writeNodeInfo(nodeInfo: NodeInfo) {
-    this.sql.exec("INSERT INTO nodes (nodeID, shortname, longname) VALUES (?, ?, ?)",
+    this.sql.exec("INSERT INTO nodes (nodeID, shortname, longname) VALUES (?, ?, ?) ON CONFLICT(nodeID) DO UPDATE SET shortname=excluded.shortname,longname=excluded.longname",
       nodeInfo.nodeID, nodeInfo.shortname, nodeInfo.longname
     );
   }
