@@ -4,7 +4,7 @@ let ChatBox = document.getElementById("ChatBox");
 let temp = document.getElementsByTagName("template")[0];
 
 function addMessage(shortname: string, unixTimestamp: number, message: string): void {
-    let localTime = new Date(unixTimestamp * 1000).toLocaleTimeString();
+    let localTime = new Date(unixTimestamp * 1000).toLocaleString();
 
     let clone = temp.content.cloneNode(true) as DocumentFragment;
     clone.querySelector("#ShortName")!.innerHTML = shortname;
