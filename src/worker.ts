@@ -27,6 +27,7 @@ export class MeshChatServer extends DurableObject<Env> {
   }
 
   // Return last n messages in ascending order
+  // nodeID will be replaced with the node's longname if it's known
   async get_last_messages_with_offset(n: number, offset: number) {
     const query = `
     SELECT COALESCE(nodes.longname, messages.nodeID) as nodeID, messages.rxTimestamp, messages.message
@@ -48,6 +49,8 @@ export class MeshChatServer extends DurableObject<Env> {
   }
   // Send a message
   async replicateMessage(body: MeshMessage) {
+    const identity = await this.getNodeInfo(body.nodeID);
+    body.nodeID = identity?.nodeID ?? body.nodeID;
     let jsonBody = JSON.stringify(body);
     this.ctx.getWebSockets().forEach((webSocket) => {
       webSocket.send(jsonBody);
