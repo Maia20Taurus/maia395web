@@ -73,6 +73,19 @@ async function receiveLatestMessages(offset: number): Promise<void> {
   
 }
 
+// Infinite scrolling logic
+const options = {
+  root: ChatBox,
+};
+// Keep track of each block of messages as a 'page'
+let current_page = 1;
+const observer = new IntersectionObserver(function() {
+    receiveLatestMessages(current_page);
+    current_page++;
+}, options);
+
+const loading_marker = document.getElementById("loading-marker") as HTMLElement;
+observer.observe(loading_marker);
 
 receiveLatestMessages(0);
 join();
