@@ -7,9 +7,9 @@ function addMessage(shortname: string, unixTimestamp: number, message: string, a
     let localTime = new Date(unixTimestamp * 1000).toLocaleString();
 
     let clone = temp.content.cloneNode(true) as DocumentFragment;
-    clone.querySelector("#ShortName")!.innerHTML = shortname;
-    clone.querySelector("#Timestamp")!.innerHTML = localTime;
-    clone.querySelector("#Message")!.innerHTML = message;
+    clone.querySelector("#ShortName")!.textContent = shortname;
+    clone.querySelector("#Timestamp")!.textContent = localTime;
+    clone.querySelector("#Message")!.textContent = message;
     if (!ChatBox) {
         return;
     }
