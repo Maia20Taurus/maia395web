@@ -52,6 +52,7 @@ async function receiveLatestMessages(): Promise<void> {
     }
 
     const result: Array<MeshMessage> = await response.json();
+    result.reverse();
 
     for (let message of result) {
         console.log(message);
