@@ -3,11 +3,6 @@ import { string } from "astro:schema";
 let ChatBox = document.getElementById("ChatBox");
 let temp = document.getElementsByTagName("template")[0];
 
-ChatBox?.addEventListener("scroll", (event) => {
-    const scrollPosition = ChatBox.clientHeight + ChatBox?.scrollTop;
-    console.log("Scroll value: " + scrollPosition);
-});
-
 function addMessage(shortname: string, unixTimestamp: number, message: string): void {
     let localTime = new Date(unixTimestamp * 1000).toLocaleString();
 
