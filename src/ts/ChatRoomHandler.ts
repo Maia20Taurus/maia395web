@@ -4,7 +4,7 @@ let ChatBox = document.getElementById("ChatBox");
 let temp = document.getElementsByTagName("template")[0];
 
 ChatBox?.addEventListener("scroll", (event) => {
-    const scrollPosition = ChatBox.scrollHeight + ChatBox?.scrollTop;
+    const scrollPosition = ChatBox.clientHeight + ChatBox?.scrollTop;
     console.log("Scroll value: " + scrollPosition);
 });
 
