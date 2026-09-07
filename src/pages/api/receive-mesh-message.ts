@@ -6,7 +6,7 @@ import { env } from 'cloudflare:workers';
 /**
  * @param offset the offset in page numbers to retrieve messages from
  */
-const PAGE_LENGTH = 6;
+const PAGE_LENGTH = 100;
 export const GET = (async ({ params, request }) => {
   const url = new URL(request.url);
   let query_offset = url.searchParams.get('offset');
