@@ -50,7 +50,7 @@ export class MeshChatServer extends DurableObject<Env> {
   // Send a message
   async replicateMessage(body: MeshMessage) {
     const identity = await this.getNodeInfo(body.nodeID);
-    body.nodeID = identity?.nodeID ?? body.nodeID;
+    body.nodeID = identity?.longname ?? body.nodeID;
     let jsonBody = JSON.stringify(body);
     this.ctx.getWebSockets().forEach((webSocket) => {
       webSocket.send(jsonBody);
