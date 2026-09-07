@@ -30,7 +30,7 @@ function join() {
 
     ws.addEventListener("message", event => {
         let data: MeshMessage = JSON.parse(event.data);
-        addMessage(data.nodeID,data.rxTimestamp,data.message);
+        addMessage(data.nodeID,data.rxTimestamp,data.message, false);
     });
 
     ws.addEventListener("error", event => {
