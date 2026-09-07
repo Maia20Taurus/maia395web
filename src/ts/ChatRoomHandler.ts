@@ -4,7 +4,7 @@ let ChatBox = document.getElementById("ChatBox");
 let temp = document.getElementsByTagName("template")[0];
 
 ChatBox?.addEventListener("scroll", (event) => {
-  console.log("Scroll value: " + ChatBox?.scrollTop);
+  console.log("Scroll value: " + ChatBox.scrollHeight + ChatBox?.scrollTop);
 });
 
 function addMessage(shortname: string, unixTimestamp: number, message: string): void {
