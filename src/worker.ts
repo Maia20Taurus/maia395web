@@ -27,14 +27,14 @@ export class MeshChatServer extends DurableObject<Env> {
   }
 
   // Return last n messages in ascending order
-  async getLastNMessages(n: number) {
+  async get_last_messages_with_offset(n: number, offset: number) {
     const query = `
     SELECT COALESCE(nodes.longname, messages.nodeID) as nodeID, messages.rxTimestamp, messages.message
     FROM messages LEFT JOIN nodes ON messages.nodeID = nodes.nodeID
-    ORDER BY rxTimestamp DESC LIMIT ?
+    ORDER BY rxTimestamp DESC LIMIT ? OFFSET ?
     `;
 
-    return this.sql.exec(query, n).toArray();
+    return this.sql.exec(query, n, offset).toArray();
   }
 
   /**
