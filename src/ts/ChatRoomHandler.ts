@@ -3,6 +3,10 @@ import { string } from "astro:schema";
 let ChatBox = document.getElementById("ChatBox");
 let temp = document.getElementsByTagName("template")[0];
 
+ChatBox?.addEventListener("scroll", (event) => {
+  console.log("Scroll value: " + ChatBox?.scrollTop);
+});
+
 function addMessage(shortname: string, unixTimestamp: number, message: string): void {
     let localTime = new Date(unixTimestamp * 1000).toLocaleString();
 
@@ -42,11 +46,13 @@ function join() {
 }
 
 /**
+ * @param {number} offset - The offset for the messages to fetch e.g. 0 for the latest messages, 10 for the next 10 messages, etc.
+ * @description 
  * @throws {Error}
  */
-async function receiveLatestMessages(): Promise<void> {
+async function receiveLatestMessages(offset: number): Promise<void> {
     try {
-        const response = await fetch("/api/receive-mesh-message");
+        const response = await fetch(`/api/receive-mesh-message?offset=${offset}`);
         if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
     }
@@ -67,5 +73,5 @@ async function receiveLatestMessages(): Promise<void> {
 }
 
 
-receiveLatestMessages();
+receiveLatestMessages(0);
 join();
