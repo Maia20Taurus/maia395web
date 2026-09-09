@@ -19,10 +19,14 @@
     "zod": "^4.5.4"
   },
   "devDependencies": {
+    "lint-staged": "^17.5.0",
     "oxfmt": "^0.67.0",
     "wrangler": "^4.112.0"
   },
   "engines": {
     "node": ">=22.12.0"
+  },
+  "lint-staged": {
+    "*": "oxfmt --no-error-on-unmatched-pattern"
   }
 }
