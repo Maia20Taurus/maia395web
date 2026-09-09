@@ -1,7 +1,7 @@
-export const prerender = false
+export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { env } from 'cloudflare:workers';
+import { env } from "cloudflare:workers";
 import { MeshMessage, NodeInfo } from "../../Meshtastic";
 import type { NodeInfoType, MeshMessageType } from "../../Meshtastic";
 import type { ZodSafeParseResult } from "astro:schema";
@@ -16,5 +16,8 @@ export const POST = (async ({ request }) => {
 
   const stub = env.MESHCHAT_SERVER_DO.getByName("foo");
   await stub.writeNodeInfo(body);
-  return new Response(JSON.stringify(body), { status: 200, headers: { "Content-Type": "application/json" } });
+  return new Response(JSON.stringify(body), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }) satisfies APIRoute;

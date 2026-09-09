@@ -1,29 +1,32 @@
-import { handle } from '@astrojs/cloudflare/handler';
-import node from 'astro/logger/node';
-import { json } from 'astro:schema';
-import { DurableObject } from 'cloudflare:workers';
+import { handle } from "@astrojs/cloudflare/handler";
+import node from "astro/logger/node";
+import { json } from "astro:schema";
+import { DurableObject } from "cloudflare:workers";
 import { MeshMessage, NodeInfo } from "./Meshtastic";
 import type { MeshMessage as MeshMessageType, NodeInfo as NodeInfoType } from "./Meshtastic";
 
 export class MeshChatServer extends DurableObject<Env> {
-    sql: SqlStorage;
-    constructor(ctx: DurableObjectState, env: Env) {
-		super(ctx, env);
+  sql: SqlStorage;
+  constructor(ctx: DurableObjectState, env: Env) {
+    super(ctx, env);
     this.sql = ctx.storage.sql;
-	}
+  }
 
   async writeNodeInfo(nodeInfo: NodeInfoType) {
-    this.sql.exec("INSERT INTO nodes (nodeID, shortname, longname) VALUES (?, ?, ?) ON CONFLICT(nodeID) DO UPDATE SET shortname=excluded.shortname,longname=excluded.longname",
-      nodeInfo.nodeID, nodeInfo.shortname, nodeInfo.longname
+    this.sql.exec(
+      "INSERT INTO nodes (nodeID, shortname, longname) VALUES (?, ?, ?) ON CONFLICT(nodeID) DO UPDATE SET shortname=excluded.shortname,longname=excluded.longname",
+      nodeInfo.nodeID,
+      nodeInfo.shortname,
+      nodeInfo.longname,
     );
   }
 
   /**
    * Get the associated NodeInfo for the given nodeID
-   * @param nodeID 
+   * @param nodeID
    * @returns the NodeInfo for the nodeID if it exists, otherwise null
    */
-  async getNodeInfo(nodeID: string): Promise<NodeInfoType|null> {
+  async getNodeInfo(nodeID: string): Promise<NodeInfoType | null> {
     const nodeInfo = this.sql.exec("SELECT * FROM nodes WHERE nodeID = ?", nodeID).toArray()[0];
     return (nodeInfo as NodeInfoType) ?? null;
   }
@@ -45,8 +48,11 @@ export class MeshChatServer extends DurableObject<Env> {
    * @param messageBody Expects 'shortname' field to have nodeID in hex form
    */
   async saveMessage(data: MeshMessageType) {
-    this.sql.exec("INSERT INTO messages (nodeID, rxTimestamp, message) VALUES (?, ?, ?)",
-      data.nodeID, data.rxTimestamp, data.message
+    this.sql.exec(
+      "INSERT INTO messages (nodeID, rxTimestamp, message) VALUES (?, ?, ?)",
+      data.nodeID,
+      data.rxTimestamp,
+      data.message,
     );
   }
   // Send a message
@@ -60,31 +66,29 @@ export class MeshChatServer extends DurableObject<Env> {
   }
 
   async fetch(request: Request) {
-    let url = new URL(request.url)
+    let url = new URL(request.url);
 
     // Creates two ends of a WebSocket connection.
-      const webSocketPair = new WebSocketPair();
-      const [client, server] = Object.values(webSocketPair);
+    const webSocketPair = new WebSocketPair();
+    const [client, server] = Object.values(webSocketPair);
 
-      // Calling `acceptWebSocket()` connects the WebSocket to the Durable Object, allowing the WebSocket to send and receive messages.
-      // Unlike `ws.accept()`, `state.acceptWebSocket(ws)` allows the Durable Object to be hibernated
-      // When the Durable Object receives a message during Hibernation, it will run the `constructor` to be re-initialized
-      this.ctx.acceptWebSocket(server);
+    // Calling `acceptWebSocket()` connects the WebSocket to the Durable Object, allowing the WebSocket to send and receive messages.
+    // Unlike `ws.accept()`, `state.acceptWebSocket(ws)` allows the Durable Object to be hibernated
+    // When the Durable Object receives a message during Hibernation, it will run the `constructor` to be re-initialized
+    this.ctx.acceptWebSocket(server);
 
-      return new Response(null, {
-          status: 101,
-          webSocket: client,
-      });
+    return new Response(null, {
+      status: 101,
+      webSocket: client,
+    });
   }
 
   async webSocketMessage(ws: WebSocket, message: ArrayBuffer | string) {
-		// Upon receiving a message from the client, reply with the same message,
-		// but will prefix the message with "[Durable Object]: " and return the number of connections.
-		ws.send(
-      message
-		);
+    // Upon receiving a message from the client, reply with the same message,
+    // but will prefix the message with "[Durable Object]: " and return the number of connections.
+    ws.send(message);
     return;
-	}
+  }
 }
 
 export default {

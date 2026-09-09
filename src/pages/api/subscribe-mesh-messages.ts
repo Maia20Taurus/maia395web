@@ -1,7 +1,7 @@
-export const prerender = false
+export const prerender = false;
 
 import type { APIRoute } from "astro";
-import { env } from 'cloudflare:workers';
+import { env } from "cloudflare:workers";
 import { MeshMessage, NodeInfo } from "../../Meshtastic";
 import type { NodeInfoType, MeshMessageType } from "../../Meshtastic";
 import type { ZodSafeParseResult } from "astro:schema";
