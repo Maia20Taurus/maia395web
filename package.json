@@ -16,7 +16,8 @@
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^14.2.3",
-		"astro": "^7.2.4"
+		"astro": "^7.2.4",
+		"zod": "^4.5.4"
 	},
 	"devDependencies": {
 		"wrangler": "^4.112.0"

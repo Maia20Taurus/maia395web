@@ -1,12 +1,15 @@
-type MeshMessage = {
-    nodeID: string, // 9 chars
-    rxTimestamp: number, // unix timestamp
-    message: string, // up to 200 bytes
-    nodeInfo: NodeInfo | null
-}
+import * as z from "zod";
 
-type NodeInfo = {
-    nodeID: string, // 9 chars
-    shortname: string, // up to 4 chars
-    longname: string // up to 36 chars
+const MeshMessage = z.object({
+    nodeID: z.string(), // 9 chars
+    rxTimestamp: z.coerce.number(), // unix timestamp
+    message: z.string(), // up to 200 bytes
+});
+type MeshMessage = z.infer<MeshMessage>;
+
+const NodeInfo = {
+    nodeID: z.string(), // 9 chars
+    shortname: z.string(), // up to 4 chars
+    longname: z.string() // up to 36 chars
 }
+type NodeInfo = z.inf<NodeInfo>;
