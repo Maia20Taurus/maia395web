@@ -1,4 +1,6 @@
-import { string } from "astro:schema";
+import { string, type ZodSafeParseResult } from "astro:schema";
+import { MeshMessage, NodeInfo } from "../Meshtastic";
+import type { MeshMessage as MeshMessageType, NodeInfo as NodeInfoType } from "../Meshtastic";
 
 let ChatBox = document.getElementById("ChatBox");
 let temp = document.getElementsByTagName("template")[0];
@@ -29,7 +31,12 @@ function join() {
     let ws = new WebSocket(wss + hostname + "/api/subscribe-mesh-messages");
 
     ws.addEventListener("message", event => {
-        let data: MeshMessage = JSON.parse(event.data);
+        let result: ZodSafeParseResult<MeshMessageType> = MeshMessage.safeParse(JSON.parse(event.data));
+        if (!result.success) {
+            console.log(result.error);
+            return;
+        }
+        const data: MeshMessageType = result.data;
         addMessage(data.nodeID,data.rxTimestamp,data.message, false);
     });
 
@@ -55,7 +62,7 @@ async function receiveLatestMessages(offset: number): Promise<void> {
         throw new Error(`Response status: ${response.status}`);
     }
 
-    const result: Array<MeshMessage> = await response.json();
+    const result: Array<MeshMessageType> = await response.json();
     result.reverse();
 
     for (let message of result) {

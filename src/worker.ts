@@ -2,6 +2,8 @@ import { handle } from '@astrojs/cloudflare/handler';
 import node from 'astro/logger/node';
 import { json } from 'astro:schema';
 import { DurableObject } from 'cloudflare:workers';
+import { MeshMessage, NodeInfo } from "./Meshtastic";
+import type { MeshMessage as MeshMessageType, NodeInfo as NodeInfoType } from "./Meshtastic";
 
 export class MeshChatServer extends DurableObject<Env> {
     sql: SqlStorage;
@@ -10,7 +12,7 @@ export class MeshChatServer extends DurableObject<Env> {
     this.sql = ctx.storage.sql;
 	}
 
-  async writeNodeInfo(nodeInfo: NodeInfo) {
+  async writeNodeInfo(nodeInfo: NodeInfoType) {
     this.sql.exec("INSERT INTO nodes (nodeID, shortname, longname) VALUES (?, ?, ?) ON CONFLICT(nodeID) DO UPDATE SET shortname=excluded.shortname,longname=excluded.longname",
       nodeInfo.nodeID, nodeInfo.shortname, nodeInfo.longname
     );
@@ -21,9 +23,9 @@ export class MeshChatServer extends DurableObject<Env> {
    * @param nodeID 
    * @returns the NodeInfo for the nodeID if it exists, otherwise null
    */
-  async getNodeInfo(nodeID: string): Promise<NodeInfo|null> {
+  async getNodeInfo(nodeID: string): Promise<NodeInfoType|null> {
     const nodeInfo = this.sql.exec("SELECT * FROM nodes WHERE nodeID = ?", nodeID).toArray()[0];
-    return (nodeInfo as NodeInfo) ?? null;
+    return (nodeInfo as NodeInfoType) ?? null;
   }
 
   // Return last n messages in ascending order
@@ -42,13 +44,13 @@ export class MeshChatServer extends DurableObject<Env> {
    * Save a message to the DO's SQLite database
    * @param messageBody Expects 'shortname' field to have nodeID in hex form
    */
-  async saveMessage(data: MeshMessage) {
+  async saveMessage(data: MeshMessageType) {
     this.sql.exec("INSERT INTO messages (nodeID, rxTimestamp, message) VALUES (?, ?, ?)",
       data.nodeID, data.rxTimestamp, data.message
     );
   }
   // Send a message
-  async replicateMessage(body: MeshMessage) {
+  async replicateMessage(body: MeshMessageType) {
     const identity = await this.getNodeInfo(body.nodeID);
     body.nodeID = identity?.longname ?? body.nodeID;
     let jsonBody = JSON.stringify(body);
