@@ -1,5 +1,28 @@
+:root {
+  --main-text: black;
+  --box-shadow-colour: gray;
+  --block-background-colour: #edeff0;
+  @media (prefers-color-scheme: dark) {
+    --main-text: white;
+    --box-shadow-colour: black;
+    --block-background-colour: #17181c;
+  }
+}
+
+
 body {
   background-color: #edeff0;
   padding-top: 100px;
   font-family: "Courier New", monospace;
+
+  color: #17181c;
+
+  @media (prefers-color-scheme: dark) {
+		background-color: #23262f;
+		color: #c1c3c8;
+	}
+
+  h1 {
+    color: var(--main-text)
+  }
 }

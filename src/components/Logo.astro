@@ -1,5 +1,35 @@
 ---
-import DarkLogo from '../assets/maia395logodark.svg'
+import LightLogo from '../assets/maia395logodark.svg'
+import DarkLogo from '../assets/maia395logo.svg'
 ---
 
-<DarkLogo aria-label="logo" style="width:100%;height:100%;"/>
+<div class="logo-container">
+  <LightLogo aria-label="logo" class="logo light-logo" />
+  <DarkLogo aria-label="logo" class="logo dark-logo" />
+</div>
+
+<style>
+  .logo-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .logo {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .dark-logo {
+    display: none;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .light-logo {
+      display: none;
+    }
+    .dark-logo {
+      display: block;
+    }
+  }
+</style>
