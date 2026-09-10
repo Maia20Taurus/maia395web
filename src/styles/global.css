@@ -4,8 +4,8 @@
   --block-background-colour: #edeff0;
   @media (prefers-color-scheme: dark) {
     --main-text: white;
-    --box-shadow-colour: black;
-    --block-background-colour: #17181c;
+    --box-shadow-colour: #141414;
+    --block-background-colour: #23262f;
   }
 }
 
@@ -18,11 +18,15 @@ body {
   color: #17181c;
 
   @media (prefers-color-scheme: dark) {
-		background-color: #23262f;
+		background-color: #17181c; 
 		color: #c1c3c8;
 	}
 
   h1 {
     color: var(--main-text)
+  }
+
+  a {
+    color: #8bc5ff;
   }
 }
